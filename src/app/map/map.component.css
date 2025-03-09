@@ -1,0 +1,6 @@
+#map {
+  height: 600px;        /* Altura del mapa */
+  width: 100%;          /* Ancho del mapa */
+  border-radius: 8px;   /* Bordes redondeados */
+  margin-top: 10px;     /* Espacio superior */
+}

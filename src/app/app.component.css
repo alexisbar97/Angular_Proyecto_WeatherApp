@@ -1,0 +1,202 @@
+/* Encabezado */
+.header {
+  background: linear-gradient(135deg, #007bff, #00bfff); /* Fondo degradado */
+  color: white; /* Texto blanco */
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header h1 {
+  font-size: 2.5rem; /* Tamaño grande para el título */
+  margin: 0;
+  font-weight: bold;
+}
+
+.header p {
+  font-size: 1.2rem; /* Tamaño mediano para el eslogan */
+  margin: 10px 0 0;
+  opacity: 0.9; /* Texto ligeramente transparente */
+}
+
+/* Contenedor principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+/* Contenedor para los bloques 1 y 2 */
+.blocks-container {
+  display: flex;
+  gap: 20px;
+}
+
+/* Bloque de clima actual */
+.weather-block {
+  flex: 1; /* Ocupa el espacio disponible */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Bloque de búsqueda de clima */
+.search-block {
+  flex: 1; /* Ocupa el espacio disponible */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Contenedor para las tablas de pronóstico */
+.forecast-blocks-container {
+  display: flex;
+  gap: 20px;
+}
+
+/* Bloque de pronóstico */
+.forecast-block {
+  flex: 1; /* Ocupa el espacio disponible */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Bloque del mapa */
+.map-block {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Estilos para el input y el botón */
+input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 70%;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el menú desplegable de sugerencias */
+.suggestions-dropdown {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.suggestions-dropdown ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestions-dropdown li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Estilos para los títulos */
+h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Estilos para los mensajes de error */
+.error-message {
+  color: red;
+  margin-top: 20px;
+}
+
+/* Estilos para la tabla de pronóstico */
+.forecast-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-table th,
+.forecast-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.forecast-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.forecast-table img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2rem; /* Tamaño más pequeño para el título en móviles */
+  }
+
+  .header p {
+    font-size: 1rem; /* Tamaño más pequeño para el eslogan en móviles */
+  }
+
+  .container {
+    padding: 10px; /* Menos padding en móviles */
+  }
+
+  .blocks-container,
+  .forecast-blocks-container {
+    flex-direction: column; /* Cambiar a columna en móviles */
+  }
+
+  .weather-block,
+  .search-block,
+  .forecast-block,
+  .map-block {
+    padding: 15px; /* Menos padding en móviles */
+  }
+
+  input {
+    width: 60%; /* Menos ancho para el input en móviles */
+  }
+
+  #map {
+    height: 300px; /* Altura más pequeña para el mapa en móviles */
+  }
+}
