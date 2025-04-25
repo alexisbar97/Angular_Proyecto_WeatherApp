@@ -1,0 +1,128 @@
+<!-- Encabezado -->
+<header class="header">
+  <div class="header-content">
+    <h1>WeatherApp</h1>
+  </div>
+</header>
+
+<!-- Contenedor principal -->
+<div class="container">
+  <!-- Contenedor para los bloques 1 y 2 -->
+  <div class="blocks-container">
+    <!-- Bloque 1: Clima de la ubicación actual -->
+    <div class="weather-block" *ngIf="weatherData">
+      <h2>Clima en tu Ubicación Actual</h2>
+      <p><strong>Ciudad:</strong> {{ weatherData.location.name }}</p>
+      <p><strong>Región:</strong> {{ weatherData.location.region }}</p>
+      <p><strong>País:</strong> {{ weatherData.location.country }}</p>
+      <p><strong>Temperatura:</strong> {{ weatherData.current.temp_c }} °C</p>
+      <p><strong>Sensación Térmica:</strong> {{ weatherData.current.feelslike_c }} °C</p>
+      <p><strong>Humedad:</strong> {{ weatherData.current.humidity }}%</p>
+      <p><strong>Velocidad del Viento:</strong> {{ weatherData.current.wind_kph }} km/h</p>
+      <p><strong>Condición:</strong></p>
+      <img [src]="'https:' + weatherData.current.condition.icon" alt="Icono del clima" style="height: 64px; width: 64px;">
+    </div>
+
+    <!-- Bloque 2: Buscar clima en otra ciudad -->
+    <div class="search-block">
+      <h2>Buscar Clima en Otra Ciudad</h2>
+      <input
+        [(ngModel)]="cityName"
+        (input)="getCitySuggestions()"
+        placeholder="Ingresa el nombre de una ciudad"
+      />
+      <button (click)="searchWeather()">Buscar</button>
+
+      <!-- Menú desplegable de sugerencias -->
+      <div class="suggestions-dropdown" *ngIf="showSuggestions && citySuggestions.length > 0">
+        <ul>
+          <li *ngFor="let city of citySuggestions" (click)="selectCity(city)">
+            {{ city.name }}, {{ city.region }}, {{ city.country }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resultados del clima buscado -->
+      <div *ngIf="searchedWeatherData">
+        <h2>Clima en {{ searchedWeatherData.location.name }}</h2>
+        <p><strong>Región:</strong> {{ searchedWeatherData.location.region }}</p>
+        <p><strong>País:</strong> {{ searchedWeatherData.location.country }}</p>
+        <p><strong>Temperatura:</strong> {{ searchedWeatherData.current.temp_c }} °C</p>
+        <p><strong>Sensación Térmica:</strong> {{ searchedWeatherData.current.feelslike_c }} °C</p>
+        <p><strong>Humedad:</strong> {{ searchedWeatherData.current.humidity }}%</p>
+        <p><strong>Velocidad del Viento:</strong> {{ searchedWeatherData.current.wind_kph }} km/h</p>
+        <p><strong>Condición:</strong></p>
+        <img [src]="'https:' + searchedWeatherData.current.condition.icon" alt="Icono del clima" style="height: 64px; width: 64px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor para las tablas de pronóstico -->
+  <div class="forecast-blocks-container">
+    <!-- Bloque 3: Pronóstico de 7 días para la ubicación actual -->
+    <div class="forecast-block" *ngIf="currentForecastData.length > 0">
+      <h2>Pronóstico para los próximos 7 días ({{ weatherData?.location?.name }})</h2>
+      <table class="forecast-table">
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th>Temperatura Mínima</th>
+            <th>Temperatura Máxima</th>
+            <th>Condición</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let day of currentForecastData">
+            <td>{{ day.date | date: 'dd/MM' }}</td>
+            <td>{{ day.day.mintemp_c }} °C</td>
+            <td>{{ day.day.maxtemp_c }} °C</td>
+            <td>
+              <img [src]="'https:' + day.day.condition.icon" alt="Icono del clima">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bloque 4: Pronóstico de 7 días para la ciudad buscada -->
+    <div class="forecast-block" *ngIf="searchedForecastData.length > 0">
+      <h2>Pronóstico para los próximos 7 días ({{ searchedWeatherData?.location?.name }})</h2>
+      <table class="forecast-table">
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th>Temperatura Mínima</th>
+            <th>Temperatura Máxima</th>
+            <th>Condición</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let day of searchedForecastData">
+            <td>{{ day.date | date: 'dd/MM' }}</td>
+            <td>{{ day.day.mintemp_c }} °C</td>
+            <td>{{ day.day.maxtemp_c }} °C</td>
+            <td>
+              <img [src]="'https:' + day.day.condition.icon" alt="Icono del clima">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Bloque 5: Mapa centralizado -->
+  <div class="map-block">
+    <h2>Mapa</h2>
+    <app-map
+      [lat]="weatherData?.location?.lat || -33.0458"
+      [lon]="weatherData?.location?.lon || -71.6197"
+      [searchedLat]="searchedWeatherData?.location?.lat ?? null"
+      [searchedLon]="searchedWeatherData?.location?.lon ?? null"
+    ></app-map>
+  </div>
+</div>
+
+<!-- Mensajes de error -->
+<div *ngIf="errorMessage">
+  <p style="color: red;">{{ errorMessage }}</p>
+</div>
